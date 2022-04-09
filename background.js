@@ -53,7 +53,8 @@ function Update(t, tabId, url) {
     return;
   }
   if (tabId in History) {
-    if (url == History[tabId][0][1]) {
+    var u = new URL(url);
+    if (url == History[tabId][0][1] || History[tabId][0][1].includes(u.host)) {
       return;
     }
   } else {
@@ -130,4 +131,4 @@ setInterval(UpdateBadges, 1000);
 
 chrome.tabs.onUpdated.addListener(HandleUpdate);
 chrome.tabs.onRemoved.addListener(HandleRemove);
-chrome.tabs.onReplaced.addListener(HandleReplace);
+// chrome.tabs.onReplaced.addListener(HandleReplace);
